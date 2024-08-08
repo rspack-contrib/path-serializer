@@ -1,24 +1,45 @@
 {
   "name": "path-serializer",
-  "version": "0.0.0",
-  "private": true,
-  "description": "",
-  "keywords": [],
+  "version": "0.0.1",
+  "description": "path-serializer",
+  "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rspack-contrib/path-serializer.git"
+  },
   "license": "MIT",
-  "author": "",
-  "main": "index.js",
+  "author": "sooniter",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.mts",
+      "import": "./dist/esm/main.js",
+      "require": "./dist/cjs/main.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/cjs/main.cjs",
+  "types": "./dist/esm/index.d.mts",
+  "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
     "build": "rslib build",
-    "check": "biome check --write",
     "dev": "rslib build --watch",
-    "format": "biome format --write",
-    "preview": "rsbuild preview",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "biome check --write",
+    "prepare": "pnpm run build && simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx nano-staged"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
+    "@microsoft/api-extractor": "^7.47.5",
     "@rslib/core": "file:./scripts/rslib-core-0.0.0.tgz",
-    "typescript": "^5.5.2"
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.1.0",
+    "lodash-es": "^4.17.21",
+    "nano-staged": "^0.8.0",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "^5.5.2",
+    "upath": "^2.0.1"
   },
   "packageManager": "pnpm@9.6.0",
   "publishConfig": {
@@ -26,7 +47,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "nano-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+    "*.{js,jsx,ts,tsx,mjs,cjs,json}": [
       "biome check --write --no-errors-on-unmatched"
     ]
   },

@@ -1,29 +1,14 @@
-# Rsbuild Project
+# path-serializer
 
-## Setup
+## Usage
 
-Install the dependencies:
+```typescript
+// vitest.setup.ts
+import { createSnapshotSerializer } from 'path-serializer';
 
-```bash
-pnpm install
-```
-
-## Get Started
-
-Start the dev server:
-
-```bash
-pnpm dev
-```
-
-Build the app for production:
-
-```bash
-pnpm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
+expect.addSnapshotSerializer(
+  createSnapshotSerializer({
+    workspace: path.join(__dirname, '..'),
+  }),
+);
 ```

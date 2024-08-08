@@ -5,7 +5,7 @@ export default defineConfig({
     {
       format: 'esm',
       dts: {
-        bundle: false,
+        bundle: true,
       },
       output: {
         distPath: {
@@ -16,7 +16,7 @@ export default defineConfig({
     {
       format: 'cjs',
       dts: {
-        bundle: false,
+        bundle: true,
       },
       output: {
         distPath: {
@@ -29,5 +29,8 @@ export default defineConfig({
     entry: {
       main: './src/index.ts',
     },
+  },
+  output: {
+    target: 'node',
   },
 });
