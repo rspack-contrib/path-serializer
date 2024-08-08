@@ -1,11 +1,6 @@
-import os from 'node:os';
 import { snakeCase } from 'lodash-es';
 import type { ApplyPathMatcherOptions, PathMatcher } from './types';
-import {
-  compilePathMatcherRegExp,
-  getRealTemporaryDirectory,
-  splitPathString,
-} from './utils';
+import { compilePathMatcherRegExp, splitPathString } from './utils';
 
 export function applyPathMatcher(
   matcher: PathMatcher,
@@ -38,17 +33,3 @@ export function applyMatcherReplacement(
     return applyPathMatcher(matcher, ret, options);
   }, str);
 }
-
-export const createDefaultPathMatchers = () => {
-  const ret: PathMatcher[] = [
-    {
-      match: /(?<=\/)(\.pnpm\/.+?\/node_modules)(?=\/)/,
-      mark: 'pnpmInner',
-    },
-  ];
-  const tmpdir = getRealTemporaryDirectory();
-  tmpdir && ret.push({ match: tmpdir, mark: 'temp' });
-  ret.push({ match: os.tmpdir(), mark: 'temp' });
-  ret.push({ match: os.homedir(), mark: 'home' });
-  return ret;
-};
