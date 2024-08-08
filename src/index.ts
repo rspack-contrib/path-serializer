@@ -6,3 +6,6 @@ document.querySelector('#root')!.innerHTML = `
   <p>Start building amazing things with Rsbuild.</p>
 </div>
 `;
+
+const a = 1;
+export { a };

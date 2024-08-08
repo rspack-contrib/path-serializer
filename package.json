@@ -1,23 +1,38 @@
 {
   "name": "path-serializer",
   "version": "0.0.0",
+  "private": true,
   "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "build": "rsbuild build",
+    "build": "rslib build",
     "check": "biome check --write",
-    "dev": "rsbuild dev --open",
+    "dev": "rslib build --watch",
     "format": "biome format --write",
     "preview": "rsbuild preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "private": true,
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@rsbuild/core": "workspace:*",
+    "@rslib/core": "file:./scripts/rslib-core-0.0.0.tgz",
     "typescript": "^5.5.2"
+  },
+  "packageManager": "pnpm@9.6.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "nano-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "rsbuild-plugin-dts": "file:./scripts/rsbuild-plugin-dts-0.0.0.tgz"
+    }
   }
 }
