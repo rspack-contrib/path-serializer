@@ -1,8 +1,9 @@
 {
   "name": "path-serializer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "path-serializer",
   "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/rspack-contrib/path-serializer.git"
@@ -11,14 +12,15 @@
   "author": "sooniter",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.mts",
+      "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/main.js",
       "require": "./dist/cjs/main.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/cjs/main.cjs",
-  "types": "./dist/esm/index.d.mts",
+  "module": "./dist/esm/main.js",
+  "types": "./dist/esm/index.d.ts",
   "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
     "build": "rslib build",
