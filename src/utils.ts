@@ -2,8 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { escapeRegExp } from 'lodash-es';
-// @ts-ignore
-import { upath } from './upath.mjs';
+import upath from 'upath';
 
 export const isPathString = (test: string): boolean =>
   path.posix.basename(test) !== test || path.win32.basename(test) !== test;

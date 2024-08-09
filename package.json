@@ -1,6 +1,6 @@
 {
   "name": "path-serializer",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "path-serializer",
   "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
   "type": "module",
@@ -56,7 +56,7 @@
   "pnpm": {
     "overrides": {
       "rsbuild-plugin-dts": "file:./scripts/rsbuild-plugin-dts-0.0.0.tgz",
-      "@rspack/core": "npm:@rspack/core-canary@1.0.0-canary-af0452f-20240808052639"
+      "@rspack/core": "npm:@rspack/core-canary@1.0.0-canary-f6e73ba-20240809060047"
     }
   }
 }
