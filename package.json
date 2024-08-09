@@ -1,6 +1,6 @@
 {
   "name": "path-serializer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "path-serializer",
   "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
   "type": "module",
@@ -26,12 +26,16 @@
     "build": "rslib build",
     "dev": "rslib build --watch",
     "lint": "biome check --write",
-    "prepare": "pnpm run build && simple-git-hooks"
+    "prepare": "pnpm run build && simple-git-hooks",
+    "test:watch": "vitest",
+    "test": "vitest run",
+    "prepublish": "pnpm run build"
   },
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged"
   },
   "devDependencies": {
+    "vitest": "^2.0.5",
     "@biomejs/biome": "^1.8.3",
     "@microsoft/api-extractor": "^7.47.5",
     "@rslib/core": "file:./scripts/rslib-core-0.0.0.tgz",
@@ -40,6 +44,7 @@
     "lodash-es": "^4.17.21",
     "nano-staged": "^0.8.0",
     "simple-git-hooks": "^2.11.1",
+    "slash": "5.1.0",
     "typescript": "^5.5.2",
     "upath": "^2.0.1"
   },

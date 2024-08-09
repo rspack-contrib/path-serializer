@@ -5,7 +5,7 @@ import { getRealTemporaryDirectory } from './utils';
 export const createDefaultPathMatchers = () => {
   const ret: PathMatcher[] = [
     {
-      match: /(?<=\/)(\.pnpm\/.+?\/node_modules)(?=\/)/,
+      match: /(?<=\/)(\.pnpm\/.+?\/node_modules)(?=\/)/g,
       mark: 'pnpmInner',
     },
   ];

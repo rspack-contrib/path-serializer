@@ -1,5 +1,6 @@
 import { applyMatcherReplacement } from './applyMatcherReplacement';
 import { createDefaultPathMatchers } from './createDefaultPathMatchers';
+import { transformCodeToPosixPath } from './transformCodeToPosixPath';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
 import { isPathString, normalizeToPosixPath } from './utils';
 
@@ -28,7 +29,7 @@ export function createSnapshotSerializer(options?: SnapshotSerializerOptions) {
     // match path-format string
     test: (val: unknown) => typeof val === 'string' && isPathString(val),
     print: (val: unknown) => {
-      const normalized = normalizeToPosixPath(val as string);
+      const normalized = transformCodeToPosixPath(val as string);
       const replaced = applyMatcherReplacement(
         pathMatchers,
         normalized,
