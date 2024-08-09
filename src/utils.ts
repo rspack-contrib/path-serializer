@@ -16,10 +16,11 @@ export function getRealTemporaryDirectory() {
   return ret;
 }
 
-export const normalizeToPosixPath = (p: string | undefined) =>
-  upath
+export const normalizeToPosixPath = (p: string | undefined) => {
+  return upath
     .normalizeSafe(path.normalize(p || ''))
-    .replace(/^([a-zA-Z]+):/, (_, m: string) => `/${m.toLowerCase()}`);
+    .replace(/^([a-zA-Z]+):/, (_: any, m: string) => `/${m.toLowerCase()}`);
+};
 
 /**
  * Compile path string to RegExp.

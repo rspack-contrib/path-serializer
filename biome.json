@@ -23,6 +23,7 @@
       "suspicious": {
         "noExplicitAny": "off"
       }
-    }
+    },
+    "ignore": ["./src/upath.mjs"]
   }
 }
