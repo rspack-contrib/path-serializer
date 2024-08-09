@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { escapeRegExp } from 'lodash-es';
-import upath from 'upath';
+// @ts-ignore
+import { upath } from './upath.mjs';
 
 export const isPathString = (test: string): boolean =>
   path.posix.basename(test) !== test || path.win32.basename(test) !== test;
@@ -16,10 +17,11 @@ export function getRealTemporaryDirectory() {
   return ret;
 }
 
-export const normalizeToPosixPath = (p: string | undefined) =>
-  upath
+export const normalizeToPosixPath = (p: string | undefined) => {
+  return upath
     .normalizeSafe(path.normalize(p || ''))
-    .replace(/^([a-zA-Z]+):/, (_, m: string) => `/${m.toLowerCase()}`);
+    .replace(/^([a-zA-Z]+):/, (_: any, m: string) => `/${m.toLowerCase()}`);
+};
 
 /**
  * Compile path string to RegExp.
