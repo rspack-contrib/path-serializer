@@ -31,7 +31,7 @@ export function compilePathMatcherRegExp(match: string | RegExp) {
     return match;
   }
   const escaped = escapeRegExp(match);
-  return new RegExp(`(?<=\\W|^)${escaped}(?=\\W|$)`);
+  return new RegExp(`(?<=\\W|^)${escaped}(?=\\W|$)`, 'g');
 }
 
 export function splitPathString(str: string) {

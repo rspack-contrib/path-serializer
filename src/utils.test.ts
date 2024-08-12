@@ -11,4 +11,18 @@ test('should serialize in windows', () => {
   expect(result2).toMatchInlineSnapshot(
     `"/d/Users/user/Documents/code/user/fe-dev-scripts/src/utils.ts"`,
   );
+
+  const result3 = normalizeToPosixPath(
+    'D:\\a\\rsbuild\\rsbuild\\packages\\plugin-babel',
+  );
+  expect(result3).toMatchInlineSnapshot(
+    `"/d/a/rsbuild/rsbuild/packages/plugin-babel"`,
+  );
+
+  const result4 = normalizeToPosixPath(
+    'D:/a/rsbuild/rsbuild/packages/compat/plugin-swc/tests',
+  );
+  expect(result4).toMatchInlineSnapshot(
+    `"/d/a/rsbuild/rsbuild/packages/compat/plugin-swc/tests"`,
+  );
 });

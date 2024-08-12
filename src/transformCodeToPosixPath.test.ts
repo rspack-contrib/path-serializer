@@ -35,4 +35,42 @@ test('should serialize loader path', () => {
       }
       "
   `);
+
+  const code2 = transformCodeToPosixPath(`{
+    "cwd": "D:/a/rsbuild/rsbuild/packages/compat/plugin-swc/tests",
+  }`);
+
+  expect(code2).toMatchInlineSnapshot(`
+    "{
+        "cwd": "/d/a/rsbuild/rsbuild/packages/compat/plugin-swc/tests",
+      }"
+  `);
+});
+
+test('should not transform http and https', () => {
+  const code = transformCodeToPosixPath(`
+    {
+        loader: 'http://localhost:8888',
+    }
+    `);
+  expect(code).toMatchInlineSnapshot(`
+    "
+        {
+            loader: 'http://localhost:8888',
+        }
+        "
+  `);
+
+  const code2 = transformCodeToPosixPath(`
+    {
+        loader: 'https://localhost:8888',
+    }
+    `);
+  expect(code2).toMatchInlineSnapshot(`
+    "
+        {
+            loader: 'https://localhost:8888',
+        }
+        "
+  `);
 });
