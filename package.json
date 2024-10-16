@@ -13,13 +13,13 @@
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
-      "import": "./dist/esm/main.js",
-      "require": "./dist/cjs/main.cjs"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/cjs/main.cjs",
-  "module": "./dist/esm/main.js",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
