@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { expect, test } from 'vitest';
-import { createSnapshotSerializer } from '../dist/esm/main';
+import { createSnapshotSerializer } from '../dist/esm/index';
 
 const require = createRequire(import.meta.url);
 
