@@ -1,9 +1,13 @@
-import type { SnapshotSerializer } from 'vitest';
 import { applyMatcherReplacement } from './applyMatcherReplacement';
 import { createTmpDirMatchers } from './matchers';
 import { transformCodeToPosixPath } from './transformCodeToPosixPath';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
 import { normalizeToPosixPath } from './utils';
+
+interface SnapshotSerializer {
+  serialize: (val: any) => string;
+  test: (arg0: any) => boolean;
+}
 
 export function createSnapshotSerializer(
   options?: SnapshotSerializerOptions,
@@ -57,14 +61,7 @@ export function createSnapshotSerializer(
     test(val: unknown) {
       return typeof val === 'string';
     },
-    serialize(
-      val: unknown,
-      _config,
-      _indentation: string,
-      _depth: number,
-      _refs,
-      _printer,
-    ) {
+    serialize(val: unknown) {
       const normalized = transformCodeToPosixPath(val as string);
       let replaced = applyMatcherReplacement(pathMatchers, normalized);
 
