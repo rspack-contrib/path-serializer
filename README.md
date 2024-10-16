@@ -1,5 +1,7 @@
 # path-serializer
 
+ <a href="https://www.npmjs.com/package/path-serializer"><img src="https://img.shields.io/npm/v/path-serializer?style=flat-square&color=98c379" alt="latest version" /></a>
+
 ```ts
 // __snapshots__/index.test.ts.snap
 {
