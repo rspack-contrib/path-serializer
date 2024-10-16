@@ -4,9 +4,6 @@ import path from 'node:path';
 import { escapeRegExp } from 'lodash-es';
 import upath from 'upath';
 
-export const isPathString = (test: string): boolean =>
-  path.posix.basename(test) !== test || path.win32.basename(test) !== test;
-
 export function getRealTemporaryDirectory() {
   let ret: string | null = null;
   try {

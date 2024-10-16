@@ -1,6 +1,6 @@
 {
   "name": "path-serializer",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "path-serializer",
   "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
   "type": "module",
