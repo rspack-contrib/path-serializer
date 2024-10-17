@@ -10,3 +10,18 @@ export const createTmpDirMatchers = () => {
   ret.push({ match: os.homedir(), mark: 'home' });
   return ret;
 };
+
+export const createPnpmInnerMatchers = () => {
+  return [
+    // posix
+    {
+      match: /(?<=\/)(\.pnpm\/.+?\/node_modules)(?=\/)/g,
+      mark: 'pnpmInner',
+    },
+    // win32
+    {
+      match: /(?<=\\)(\.pnpm\\.+?\\node_modules)(?=\\)/g,
+      mark: 'pnpmInner',
+    },
+  ];
+};

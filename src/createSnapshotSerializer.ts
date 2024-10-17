@@ -1,5 +1,5 @@
 import { applyMatcherReplacement } from './applyMatcherReplacement';
-import { createTmpDirMatchers } from './matchers';
+import { createPnpmInnerMatchers, createTmpDirMatchers } from './matchers';
 import { transformCodeToPosixPath } from './transformCodeToPosixPath';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
 import { normalizeToPosixPath } from './utils';
@@ -38,10 +38,7 @@ export function createSnapshotSerializer(
       pathMatchers.push({ mark: 'workspace', match: workspace });
     }
     if (replacePnpmInner) {
-      pathMatchers.push({
-        match: /(?<=\/)(\.pnpm\/.+?\/node_modules)(?=\/)/g,
-        mark: 'pnpmInner',
-      });
+      pathMatchers.push(...createPnpmInnerMatchers());
     }
     pathMatchers.push(...customMatchers);
     if (replaceTmpDir) {
