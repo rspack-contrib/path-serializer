@@ -14,9 +14,6 @@ expect.addSnapshotSerializer(
 
 test('should serialize <ROOT>', () => {
   const root = __dirname;
-
-  console.log(root, 1111111111);
-
   expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e"`);
 });
 
