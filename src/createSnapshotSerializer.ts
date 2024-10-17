@@ -1,5 +1,9 @@
 import { applyMatcherReplacement } from './applyMatcherReplacement';
-import { createPnpmInnerMatchers, createTmpDirMatchers } from './matchers';
+import {
+  createHomeDirMatchers,
+  createPnpmInnerMatchers,
+  createTmpDirMatchers,
+} from './matchers';
 import { transformCodeToPosixPath } from './transformCodeToPosixPath';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
 import { normalizeToPosixPath } from './utils';
@@ -14,7 +18,7 @@ export function createSnapshotSerializer(
 ): SnapshotSerializer {
   const {
     root = process.cwd(),
-    workspace = process.cwd(),
+    workspace = '',
     replace: customMatchers = [],
     replacePost: customPostMatchers = [],
     features = {},
@@ -25,6 +29,7 @@ export function createSnapshotSerializer(
     replaceWorkspace = true,
     replacePnpmInner = true,
     replaceTmpDir = true,
+    replaceHomeDir = true,
     addDoubleQuotes = true,
     transformWin32Path = true,
     escapeDoubleQuotes = true,
@@ -34,17 +39,20 @@ export function createSnapshotSerializer(
   function createPathMatchers(): PathMatcher[] {
     const pathMatchers: PathMatcher[] = [];
     pathMatchers.push(...customMatchers);
-    if (replaceRoot) {
-      pathMatchers.push({ mark: 'root', match: root });
-    }
-    if (replaceWorkspace) {
+    if (replaceWorkspace && workspace) {
       pathMatchers.push({ mark: 'workspace', match: workspace });
+    }
+    if (replaceRoot && root) {
+      pathMatchers.push({ mark: 'root', match: root });
     }
     if (replacePnpmInner) {
       pathMatchers.push(...createPnpmInnerMatchers());
     }
     if (replaceTmpDir) {
       pathMatchers.push(...createTmpDirMatchers());
+    }
+    if (replaceHomeDir) {
+      pathMatchers.push(...createHomeDirMatchers());
     }
     pathMatchers.push(...customPostMatchers);
     return pathMatchers;

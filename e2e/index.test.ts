@@ -7,14 +7,18 @@ const require = createRequire(import.meta.url);
 
 expect.addSnapshotSerializer(
   createSnapshotSerializer({
-    cwd: path.resolve(__dirname, '..'),
-    workspace: path.resolve(__dirname, '..'),
+    root: path.resolve(__dirname, '..'),
+    workspace: __dirname,
   }),
 );
 
-test('should serialize <ROOT>', () => {
-  const root = __dirname;
-  expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e"`);
+test('should serialize <ROOT> and <WORKSPACE>', () => {
+  const testWorkspace = __dirname;
+  // Match workspace first, and then match root, so it can't be <ROOT>/e2e
+  expect(testWorkspace).toMatchInlineSnapshot(`"<WORKSPACE>"`);
+
+  const testRoot = path.join(__dirname, '../src');
+  expect(testRoot).toMatchInlineSnapshot(`"<ROOT>/src"`);
 });
 
 test('should serialize <PNPM_INNER>', () => {

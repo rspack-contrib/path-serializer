@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { expect, test } from 'vitest';
 import { createSnapshotSerializer } from '../dist/esm/index';
 
@@ -9,10 +8,8 @@ test('should serialize <PNPM_INNER> in win32', () => {
 
   expect.addSnapshotSerializer(
     createSnapshotSerializer({
-      cwd: path.resolve(__dirname, '..'),
-      workspace: path.resolve(__dirname, '..'),
       features: {
-        ansiDoubleQuotes: false,
+        escapeDoubleQuotes: false,
         addDoubleQuotes: false,
         transformWin32Path: false,
       },
@@ -33,10 +30,8 @@ test('should serialize <PNPM_INNER> in win32 with transform', () => {
 
   expect.addSnapshotSerializer(
     createSnapshotSerializer({
-      cwd: path.resolve(__dirname, '..'),
-      workspace: path.resolve(__dirname, '..'),
       features: {
-        ansiDoubleQuotes: false,
+        escapeDoubleQuotes: false,
         addDoubleQuotes: false,
         transformWin32Path: true,
       },

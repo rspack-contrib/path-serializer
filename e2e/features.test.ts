@@ -6,7 +6,6 @@ import { createSnapshotSerializer } from '../dist/esm/index';
 expect.addSnapshotSerializer(
   createSnapshotSerializer({
     root: path.resolve(__dirname, '..'),
-    workspace: path.resolve(__dirname, '..'),
     features: {
       escapeDoubleQuotes: false,
       addDoubleQuotes: false,

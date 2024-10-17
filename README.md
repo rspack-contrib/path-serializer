@@ -1,6 +1,6 @@
 # path-serializer
 
- <a href="https://www.npmjs.com/package/path-serializer"><img src="https://img.shields.io/npm/v/path-serializer?style=flat-square&color=98c379" alt="latest version" /></a>
+[![npm latest version](https://img.shields.io/npm/v/path-serializer?style=flat-square&color=98c379)](https://www.npmjs.com/package/path-serializer)
 
 ```ts
 // __snapshots__/index.test.ts.snap
@@ -21,6 +21,8 @@ expect.addSnapshotSerializer(
   }),
 );
 ```
+
+The specific usage can be found in [./src/types.ts](https://github.com/rspack-contrib/path-serializer/blob/main/src/types.ts)
 
 ## Showcases
 
