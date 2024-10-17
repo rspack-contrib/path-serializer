@@ -13,11 +13,11 @@ expect.addSnapshotSerializer(
 );
 
 test('should serialize <ROOT>', () => {
-  const root = new URL('.', import.meta.url).pathname;
+  const root = __dirname;
 
   console.log(root, 1111111111);
 
-  expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e/"`);
+  expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e"`);
 });
 
 test('should serialize <PNPM_INNER>', () => {
