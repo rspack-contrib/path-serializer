@@ -13,9 +13,9 @@ expect.addSnapshotSerializer(
 );
 
 test('should serialize <ROOT>', () => {
-  const root = new URL('.', import.meta.url).href;
+  const root = new URL('.', import.meta.url).pathname;
 
-  expect(root).toMatchInlineSnapshot(`"file://<ROOT>/e2e/"`);
+  expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e/"`);
 });
 
 test('should serialize <PNPM_INNER>', () => {
