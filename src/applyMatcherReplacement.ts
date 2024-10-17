@@ -6,7 +6,7 @@ export function applyPathMatcher(
   matcher: PathMatcher,
   str: string,
   options: ApplyPathMatcherOptions = {},
-) {
+): string {
   const regex = compilePathMatcherRegExp(matcher.match);
   const replacer = (substring: string, ...args: any[]): string => {
     if (
@@ -28,7 +28,7 @@ export function applyMatcherReplacement(
   matchers: PathMatcher[],
   str: string,
   options: ApplyPathMatcherOptions = {},
-) {
+): string {
   return matchers.reduce((ret, matcher) => {
     return applyPathMatcher(matcher, ret, options);
   }, str);

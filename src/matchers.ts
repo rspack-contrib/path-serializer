@@ -2,7 +2,7 @@ import os from 'node:os';
 import type { PathMatcher } from './types';
 import { getRealTemporaryDirectory } from './utils';
 
-export const createTmpDirMatchers = () => {
+export const createTmpDirMatchers = (): PathMatcher[] => {
   const ret: PathMatcher[] = [];
   const tmpdir = getRealTemporaryDirectory();
   tmpdir && ret.push({ match: tmpdir, mark: 'temp' });
@@ -11,7 +11,7 @@ export const createTmpDirMatchers = () => {
   return ret;
 };
 
-export const createPnpmInnerMatchers = () => {
+export const createPnpmInnerMatchers = (): PathMatcher[] => {
   return [
     // posix
     {

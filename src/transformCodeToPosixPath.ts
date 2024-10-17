@@ -1,5 +1,5 @@
 import { normalizeToPosixPath } from './utils';
-function transformCodeToPosixPath(code: string) {
+function transformCodeToPosixPath(code: string): string {
   return code.replace(
     // windows absolute path
     // ignore http, https, file
