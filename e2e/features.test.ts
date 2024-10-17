@@ -16,11 +16,11 @@ expect.addSnapshotSerializer(
 
 test('should serialize file content without escaping \\"', () => {
   const fileContent = `"use strict";
-const a = ${require.resolve('@rslib/core')};
+const a = "${require.resolve('@rslib/core')}";
 `;
 
   expect(fileContent).toMatchInlineSnapshot(`
     "use strict";
-    const a = <ROOT>/node_modules/<PNPM_INNER>/@rslib/core/dist/index.js;
+    const a = "<ROOT>/node_modules/<PNPM_INNER>/@rslib/core/dist/index.js";
   `);
 });

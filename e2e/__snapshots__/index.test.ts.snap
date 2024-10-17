@@ -2,6 +2,6 @@
 
 exports[`should serialize file content 2`] = `
 "\\"use strict\\";
-const a = <ROOT>/node_modules/<PNPM_INNER>/@rslib/core/dist/index.js;
+const a = \\"<ROOT>/node_modules/<PNPM_INNER>/@rslib/core/dist/index.js\\";
 "
 `;
