@@ -30,6 +30,10 @@ export interface Features {
    * @default true
    */
   addDoubleQuotes?: boolean;
+  /**
+   * @default true
+   */
+  transformWin32Path?: boolean;
 }
 
 export interface SnapshotSerializerOptions {
