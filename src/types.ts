@@ -25,21 +25,26 @@ export interface Features {
   /**
    * @default true
    */
-  ansiDoubleQuotes?: boolean;
-  /**
-   * @default true
-   */
   addDoubleQuotes?: boolean;
   /**
    * @default true
    */
   transformWin32Path?: boolean;
+  /**
+   * @default true
+   */
+  escapeDoubleQuotes?: boolean;
+  /**
+   * @default true
+   */
+  escapeEOL?: boolean;
 }
 
 export interface SnapshotSerializerOptions {
-  cwd?: string;
+  root?: string;
   workspace?: string;
   replace?: PathMatcher[];
+  replacePost?: PathMatcher[];
   features?: Features;
 }
 

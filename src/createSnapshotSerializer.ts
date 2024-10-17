@@ -13,9 +13,10 @@ export function createSnapshotSerializer(
   options?: SnapshotSerializerOptions,
 ): SnapshotSerializer {
   const {
-    cwd = process.cwd(),
+    root = process.cwd(),
     workspace = process.cwd(),
     replace: customMatchers = [],
+    replacePost: customPostMatchers = [],
     features = {},
   } = options || {};
 
@@ -24,15 +25,17 @@ export function createSnapshotSerializer(
     replaceWorkspace = true,
     replacePnpmInner = true,
     replaceTmpDir = true,
-    ansiDoubleQuotes = true,
     addDoubleQuotes = true,
     transformWin32Path = true,
+    escapeDoubleQuotes = true,
+    escapeEOL = true,
   } = features;
 
   function createPathMatchers(): PathMatcher[] {
     const pathMatchers: PathMatcher[] = [];
+    pathMatchers.push(...customMatchers);
     if (replaceRoot) {
-      pathMatchers.push({ mark: 'root', match: cwd });
+      pathMatchers.push({ mark: 'root', match: root });
     }
     if (replaceWorkspace) {
       pathMatchers.push({ mark: 'workspace', match: workspace });
@@ -40,10 +43,10 @@ export function createSnapshotSerializer(
     if (replacePnpmInner) {
       pathMatchers.push(...createPnpmInnerMatchers());
     }
-    pathMatchers.push(...customMatchers);
     if (replaceTmpDir) {
       pathMatchers.push(...createTmpDirMatchers());
     }
+    pathMatchers.push(...customPostMatchers);
     return pathMatchers;
   }
   const pathMatchers: PathMatcher[] = createPathMatchers();
@@ -67,8 +70,11 @@ export function createSnapshotSerializer(
 
       replaced = applyMatcherReplacement(pathMatchers, replaced);
 
-      if (ansiDoubleQuotes) {
+      if (escapeDoubleQuotes) {
         replaced = replaced.replace(/"/g, '\\"');
+      }
+      if (escapeEOL) {
+        replaced = replaced.replace(/\\r\\n/g, '\n');
       }
       if (addDoubleQuotes) {
         replaced = `"${replaced}"`;
