@@ -82,7 +82,7 @@ export function createSnapshotSerializer(
         replaced = replaced.replace(/"/g, '\\"');
       }
       if (escapeEOL) {
-        replaced = replaced.replace(/\\r\\n/g, '\n');
+        replaced = replaced.replace(/\\r\\n/g, '\\n');
       }
       if (addDoubleQuotes) {
         replaced = `"${replaced}"`;
