@@ -45,4 +45,4 @@ jobs:
         run: pnpm install
 
       - name: Unit Test
-        run: pnpm run test:unit
+        run: pnpm run test
