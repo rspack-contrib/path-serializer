@@ -5,10 +5,10 @@ import { createSnapshotSerializer } from '../dist/esm/index';
 
 expect.addSnapshotSerializer(
   createSnapshotSerializer({
-    cwd: path.resolve(__dirname, '..'),
+    root: path.resolve(__dirname, '..'),
     workspace: path.resolve(__dirname, '..'),
     features: {
-      ansiDoubleQuotes: false,
+      escapeDoubleQuotes: false,
       addDoubleQuotes: false,
     },
   }),
