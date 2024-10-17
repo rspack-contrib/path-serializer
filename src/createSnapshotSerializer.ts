@@ -26,6 +26,7 @@ export function createSnapshotSerializer(
     replaceTmpDir = true,
     ansiDoubleQuotes = true,
     addDoubleQuotes = true,
+    transformWin32Path = true,
   } = features;
 
   function createPathMatchers(): PathMatcher[] {
@@ -42,10 +43,10 @@ export function createSnapshotSerializer(
         mark: 'pnpmInner',
       });
     }
+    pathMatchers.push(...customMatchers);
     if (replaceTmpDir) {
       pathMatchers.push(...createTmpDirMatchers());
     }
-    pathMatchers.push(...customMatchers);
     return pathMatchers;
   }
   const pathMatchers: PathMatcher[] = createPathMatchers();
@@ -62,8 +63,12 @@ export function createSnapshotSerializer(
       return typeof val === 'string';
     },
     serialize(val: unknown) {
-      const normalized = transformCodeToPosixPath(val as string);
-      let replaced = applyMatcherReplacement(pathMatchers, normalized);
+      let replaced: string = val as string;
+      if (transformWin32Path) {
+        replaced = transformCodeToPosixPath(replaced);
+      }
+
+      replaced = applyMatcherReplacement(pathMatchers, replaced);
 
       if (ansiDoubleQuotes) {
         replaced = replaced.replace(/"/g, '\\"');
