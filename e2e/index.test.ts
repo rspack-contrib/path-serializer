@@ -15,6 +15,8 @@ expect.addSnapshotSerializer(
 test('should serialize <ROOT>', () => {
   const root = new URL('.', import.meta.url).pathname;
 
+  console.log(root, 1111111111);
+
   expect(root).toMatchInlineSnapshot(`"<ROOT>/e2e/"`);
 });
 
