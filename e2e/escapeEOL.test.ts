@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { expect } from 'vitest';
 import { test } from 'vitest';
-import { createSnapshotSerializer } from '../dist/esm/index';
+import { createSnapshotSerializer } from 'path-serializer';
 
 test('should escapeEOL', async () => {
   const fileContent = await readFile(

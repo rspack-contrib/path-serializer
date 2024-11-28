@@ -7,14 +7,18 @@ export interface PathMatcher {
 
 export interface Features {
   /**
+   * /foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
    * @default true
    */
   replaceRoot?: boolean;
   /**
+   * /foo/rspack/packages/core/src -> <WORKSPACE>/src
    * @default true
    */
   replaceWorkspace?: boolean;
   /**
+   * /foo/node_modules/.pnpm/@swc+helpers@0.5.11/node_modules/@swc/helpers/esm/_class_private_method_get.js
+   * -> /foo/node_modules/<PNPM_INNER>/@swc/helpers/esm/_class_private_method_get.js
    * @default true
    */
   replacePnpmInner?: boolean;
@@ -27,10 +31,13 @@ export interface Features {
    */
   replaceHomeDir?: boolean;
   /**
+   * foo -> "foo"
    * @default true
    */
   addDoubleQuotes?: boolean;
   /**
+   * D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts
+   * -> /d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts
    * @default true
    */
   transformWin32Path?: boolean;
@@ -39,9 +46,16 @@ export interface Features {
    */
   escapeDoubleQuotes?: boolean;
   /**
+   * \r\n -> \n
    * @default true
    */
   escapeEOL?: boolean;
+  /**
+   * \u001b[1mBold Text\u001b[0m
+   * -> <CLR=BOLD>Bold Text<CLR=0>
+   * @default false
+   */
+  transformCLR?: boolean;
 }
 
 export interface SnapshotSerializerOptions {

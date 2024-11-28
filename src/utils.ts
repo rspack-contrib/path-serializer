@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import os from 'node:os';
-import path from 'node:path';
 import { escapeRegExp } from 'lodash-es';
-import upath from 'upath';
 
 export function getRealTemporaryDirectory(): string | null {
   let ret: string | null = null;
@@ -12,12 +10,6 @@ export function getRealTemporaryDirectory(): string | null {
   } catch {}
   return ret;
 }
-
-export const normalizeToPosixPath = (p: string | undefined): string => {
-  return upath
-    .normalizeSafe(path.normalize(p || ''))
-    .replace(/^([a-zA-Z]+):/, (_: any, m: string) => `/${m.toLowerCase()}`);
-};
 
 /**
  * Compile path string to RegExp.

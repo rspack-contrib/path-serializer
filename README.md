@@ -2,6 +2,10 @@
 
 [![npm latest version](https://img.shields.io/npm/v/path-serializer?style=flat-square&color=98c379)](https://www.npmjs.com/package/path-serializer)
 
+1. stabilize pnpm dependencies path and update dependencies smoothly
+2. transform win32 path to posix path
+and more...
+
 ```ts
 // __snapshots__/index.test.ts.snap
 {

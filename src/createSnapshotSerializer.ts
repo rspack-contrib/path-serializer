@@ -4,9 +4,12 @@ import {
   createPnpmInnerMatchers,
   createTmpDirMatchers,
 } from './matchers';
-import { transformCodeToPosixPath } from './transformCodeToPosixPath';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
-import { normalizeToPosixPath } from './utils';
+import {
+  normalizePathToPosix,
+  normalizeCodeToPosix,
+  normalizeCLR,
+} from './normalize';
 
 interface SnapshotSerializer {
   serialize: (val: any) => string;
@@ -34,6 +37,7 @@ export function createSnapshotSerializer(
     transformWin32Path = true,
     escapeDoubleQuotes = true,
     escapeEOL = true,
+    transformCLR = false,
   } = features;
 
   function createPathMatchers(): PathMatcher[] {
@@ -61,7 +65,7 @@ export function createSnapshotSerializer(
 
   for (const matcher of pathMatchers) {
     if (typeof matcher.match === 'string') {
-      matcher.match = normalizeToPosixPath(matcher.match);
+      matcher.match = normalizePathToPosix(matcher.match);
     }
   }
 
@@ -73,10 +77,14 @@ export function createSnapshotSerializer(
     serialize(val: unknown) {
       let replaced: string = val as string;
       if (transformWin32Path) {
-        replaced = transformCodeToPosixPath(replaced);
+        replaced = normalizeCodeToPosix(replaced);
       }
 
       replaced = applyMatcherReplacement(pathMatchers, replaced);
+
+      if (transformCLR) {
+        replaced = normalizeCLR(replaced);
+      }
 
       if (escapeDoubleQuotes) {
         replaced = replaced.replace(/"/g, '\\"');
