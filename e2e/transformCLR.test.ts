@@ -5,13 +5,10 @@ import { createSnapshotSerializer } from 'path-serializer';
 expect.addSnapshotSerializer(
   createSnapshotSerializer({
     root: path.resolve(__dirname, '..'),
-    features: {
-      transformCLR: true,
-    },
   }),
 );
 
-test('should serialize file content without escaping \\"', () => {
+test('should transform the color', () => {
   const input = '\u001b[1mBold Text\u001b[0m';
   expect(input).toMatchInlineSnapshot(`"<CLR=BOLD>Bold Text<CLR=0>"`);
 });

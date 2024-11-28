@@ -53,7 +53,7 @@ export interface Features {
   /**
    * \u001b[1mBold Text\u001b[0m
    * -> <CLR=BOLD>Bold Text<CLR=0>
-   * @default false
+   * @default true 
    */
   transformCLR?: boolean;
 }
