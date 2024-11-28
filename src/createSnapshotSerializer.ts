@@ -37,7 +37,7 @@ export function createSnapshotSerializer(
     transformWin32Path = true,
     escapeDoubleQuotes = true,
     escapeEOL = true,
-    transformCLR = false,
+    transformCLR = true,
   } = features;
 
   function createPathMatchers(): PathMatcher[] {
