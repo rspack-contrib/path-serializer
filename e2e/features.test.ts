@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { expect } from 'vitest';
 import { test } from 'vitest';
-import { createSnapshotSerializer } from '../dist/esm/index';
+import { createSnapshotSerializer } from 'path-serializer';
 
 expect.addSnapshotSerializer(
   createSnapshotSerializer({

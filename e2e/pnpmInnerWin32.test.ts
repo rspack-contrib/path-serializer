@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { createSnapshotSerializer } from '../dist/esm/index';
+import { createSnapshotSerializer } from 'path-serializer';
 
 test('should serialize <PNPM_INNER> in win32', () => {
   const fileContent = `{
