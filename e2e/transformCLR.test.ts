@@ -12,3 +12,8 @@ test('should transform the color', () => {
   const input = '\u001b[1mBold Text\u001b[0m';
   expect(input).toMatchInlineSnapshot(`"<CLR=BOLD>Bold Text<CLR=0>"`);
 });
+
+test('bad case 1', () => {
+  const input = 'static/react.svg'; // bad case: 'static/reactXsvg'
+  expect(input).toMatchInlineSnapshot(`"static/react.svg"`);
+});

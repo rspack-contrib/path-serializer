@@ -115,4 +115,43 @@ describe('normalizeCLR', () => {
     const expected = '<CLR=BOLD>Bold Text<CLR=0>';
     expect(normalizeCLR(input)).toBe(expected);
   });
+
+  test('should replace time values with "X" followed by time unit', () => {
+    const testCases = [
+      {
+        input: '1.234s',
+        expected: 'Xs',
+      },
+      {
+        input: '0.001s',
+        expected: 'Xs',
+      },
+      {
+        input: '12 s',
+        expected: 'X s',
+      },
+      {
+        input: '\u001b[33m5.678s\u001b[39m',
+        expected: '<CLR=33>Xs<CLR=39>',
+      },
+      {
+        input: 'Time: 123.456s',
+        expected: 'Time: Xs',
+      },
+      // 测试多个时间值的情况
+      {
+        input: 'Time: 1.2s, 3.4s and 5.6s',
+        expected: 'Time: Xs, Xs and Xs',
+      },
+      // 测试带有颜色的多个时间值
+      {
+        input: '\u001b[33m2.5s\u001b[39m and \u001b[32m1.8s\u001b[39m',
+        expected: '<CLR=33>Xs<CLR=39> and <CLR=32>Xs<CLR=39>',
+      },
+    ];
+
+    testCases.forEach(({ input, expected }) => {
+      expect(normalizeCLR(input)).toMatch(expected);
+    });
+  });
 });
