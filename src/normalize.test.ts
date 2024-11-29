@@ -154,4 +154,33 @@ describe('normalizeCLR', () => {
       expect(normalizeCLR(input)).toMatch(expected);
     });
   });
+
+  test('should not replace non-time number patterns', () => {
+    const testCases = [
+      {
+        input: './react/assets.svg',
+        expected: './react/assets.svg',
+      },
+      {
+        input: '123px',
+        expected: '123px',
+      },
+      {
+        input: 'version 1.2.3',
+        expected: 'version 1.2.3',
+      },
+      {
+        input: 'module.exports = path.sep',
+        expected: 'module.exports = path.sep',
+      },
+      {
+        input: 'a: url(7159cadb6967ca3.svg);',
+        expected: 'a: url(7159cadb6967ca3.svg);',
+      },
+    ];
+
+    testCases.forEach(({ input, expected }) => {
+      expect(normalizeCLR(input)).toBe(expected);
+    });
+  });
 });

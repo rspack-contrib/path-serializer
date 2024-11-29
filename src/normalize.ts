@@ -29,6 +29,6 @@ export const normalizeCLR = (str: string): string => {
       // CHANGE: The time unit display in Rspack is second
       // CHANGE2: avoid a bad case "./react/assets.svg" -> "./react/assetsXsvg"
       // modified based on https://github.com/webpack/webpack/blob/001cab14692eb9a833c6b56709edbab547e291a1/test/StatsTestCases.basictest.js#L199
-      .replace(/[0-9]+[.0-9]*(<\/CLR>)?(\s?s)/g, 'X$1$2')
+      .replace(/[0-9]+(\.[0-9]+)*(<\/CLR>)?(\s?s)/g, 'X$2$3')
   );
 };
