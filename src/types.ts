@@ -23,10 +23,12 @@ export interface Features {
    */
   replacePnpmInner?: boolean;
   /**
+   * <TEMP>
    * @default true
    */
   replaceTmpDir?: boolean;
   /**
+   * <HOME>
    * @default true
    */
   replaceHomeDir?: boolean;
@@ -42,6 +44,7 @@ export interface Features {
    */
   transformWin32Path?: boolean;
   /**
+   * "" -> \"\"
    * @default true
    */
   escapeDoubleQuotes?: boolean;
@@ -53,7 +56,7 @@ export interface Features {
   /**
    * \u001b[1mBold Text\u001b[0m
    * -> <CLR=BOLD>Bold Text<CLR=0>
-   * @default true 
+   * @default true
    */
   transformCLR?: boolean;
 }
@@ -72,13 +75,21 @@ export interface SnapshotSerializerOptions {
    */
   workspace?: string;
   /**
-   * @description replace -> workspace root pnpmInner temp home -> replacePost
+   * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
+   */
+  beforeSerialize?: (val: string) => string;
+  /**
+   * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
    */
   replace?: PathMatcher[];
   /**
-   * @description replace -> workspace root pnpmInner temp home -> replacePost
+   * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
    */
   replacePost?: PathMatcher[];
+  /**
+   * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
+   */
+  afterSerialize?: (val: string) => string;
   features?: Features;
 }
 

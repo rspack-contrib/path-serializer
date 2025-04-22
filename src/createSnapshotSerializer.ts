@@ -25,6 +25,8 @@ export function createSnapshotSerializer(
     replace: customMatchers = [],
     replacePost: customPostMatchers = [],
     features = {},
+    beforeSerialize,
+    afterSerialize,
   } = options || {};
 
   const {
@@ -76,6 +78,11 @@ export function createSnapshotSerializer(
     },
     serialize(val: unknown) {
       let replaced: string = val as string;
+
+      if (beforeSerialize) {
+        replaced = beforeSerialize(replaced);
+      }
+
       if (transformWin32Path) {
         replaced = normalizeCodeToPosix(replaced);
       }
@@ -94,6 +101,10 @@ export function createSnapshotSerializer(
       }
       if (addDoubleQuotes) {
         replaced = `"${replaced}"`;
+      }
+
+      if (afterSerialize) {
+        replaced = afterSerialize(replaced);
       }
       return replaced;
     },
