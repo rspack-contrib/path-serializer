@@ -2,8 +2,9 @@
 
 [![npm latest version](https://img.shields.io/npm/v/path-serializer?style=flat-square&color=98c379)](https://www.npmjs.com/package/path-serializer)
 
-1. stabilize pnpm dependencies path and update dependencies smoothly
+1. stabilize pnpm dependencies path in snapshot
 2. transform win32 path to posix path
+3. escapeEOL \r\n -> \n
    and more...
 
 ```ts
@@ -31,7 +32,7 @@ expect.addSnapshotSerializer(
 );
 ```
 
-The specific usage can be found in [./src/types.ts](https://github.com/rspack-contrib/path-serializer/blob/main/src/types.ts)
+More features can be found in [./src/types.ts](https://github.com/rspack-contrib/path-serializer/blob/main/src/types.ts)
 
 ## Showcases
 
