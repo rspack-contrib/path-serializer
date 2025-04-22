@@ -36,6 +36,11 @@ test('transformWin32RelativePath', () => {
   expect(case2).toMatchInlineSnapshot(
     `Cannot find file "../getting-started/next"`,
   );
+
+  const case3 = `Cannot find file ".\\getting-started\\next"`;
+  expect(case3).toMatchInlineSnapshot(
+    `Cannot find file "./getting-started/next"`,
+  );
 });
 
 describe('transformCLR', () => {

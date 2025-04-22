@@ -21,7 +21,7 @@ export const normalizeCodeToPosix = (code: string): string => {
 
 export function normalizeWin32RelativePath(p: string): string {
   return p.replace(
-    /(['"`])(\.\.([\\/]))+([\w-]+\3)+[^\\/]*\1/g,
+    /(['"`])(\.\.?([\\/]))+([\w-]+\3?)+[^\\/]*\1/g,
     (match: string) => {
       return match.replace(/\\/g, '/');
     },
