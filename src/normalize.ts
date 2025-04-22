@@ -19,12 +19,25 @@ export const normalizeCodeToPosix = (code: string): string => {
   );
 };
 
+export function normalizeWin32RelativePath(p: string): string {
+  return p.replace(
+    /(['"`])(\.\.?([\\/]))+((?:[^\W_]|-)+\3?)+[^\\/]*\1/g,
+    (match: string) => {
+      return match.replace(/\\/g, '/');
+    },
+  );
+}
+
 export const normalizeCLR = (str: string): string => {
   return (
     str
+      // biome-ignore lint/suspicious/noControlCharactersInRegex: copied code
       .replace(/\u001b\[1m\u001b\[([0-9;]*)m/g, '<CLR=$1,BOLD>')
+      // biome-ignore lint/suspicious/noControlCharactersInRegex: copied code
       .replace(/\u001b\[1m/g, '<CLR=BOLD>')
+      // biome-ignore lint/suspicious/noControlCharactersInRegex: copied code
       .replace(/\u001b\[39m\u001b\[22m/g, '</CLR>')
+      // biome-ignore lint/suspicious/noControlCharactersInRegex: copied code
       .replace(/\u001b\[([0-9;]*)m/g, '<CLR=$1>')
       // CHANGE: The time unit display in Rspack is second
       // CHANGE2: avoid a bad case "./react/assets.svg" -> "./react/assetsXsvg"
