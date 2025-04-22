@@ -4,14 +4,14 @@ import {
   createPnpmInnerMatchers,
   createTmpDirMatchers,
 } from './matchers';
-import type { PathMatcher, SnapshotSerializerOptions } from './types';
 import {
-  normalizePathToPosix,
-  normalizeCodeToPosix,
   normalizeCLR,
+  normalizeCodeToPosix,
+  normalizePathToPosix,
 } from './normalize';
+import type { PathMatcher, SnapshotSerializerOptions } from './types';
 
-interface SnapshotSerializer {
+export interface SnapshotSerializer {
   serialize: (val: any) => string;
   test: (arg0: any) => boolean;
 }
