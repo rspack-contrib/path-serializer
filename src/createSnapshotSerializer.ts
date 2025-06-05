@@ -8,6 +8,7 @@ import {
   normalizeCLR,
   normalizeCodeToPosix,
   normalizePathToPosix,
+  normalizeWin32RelativePath,
 } from './normalize';
 import type { PathMatcher, SnapshotSerializerOptions } from './types';
 
@@ -37,6 +38,7 @@ export function createSnapshotSerializer(
     replaceHomeDir = true,
     addDoubleQuotes = true,
     transformWin32Path = true,
+    transformWin32RelativePath = true,
     escapeDoubleQuotes = true,
     escapeEOL = true,
     transformCLR = true,
@@ -85,6 +87,10 @@ export function createSnapshotSerializer(
 
       if (transformWin32Path) {
         replaced = normalizeCodeToPosix(replaced);
+      }
+
+      if (transformWin32RelativePath) {
+        replaced = normalizeWin32RelativePath(replaced);
       }
 
       replaced = applyMatcherReplacement(pathMatchers, replaced);

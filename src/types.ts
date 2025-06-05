@@ -44,6 +44,12 @@ export interface Features {
    */
   transformWin32Path?: boolean;
   /**
+   * `..\..\getting-started\next`
+   * -> `../../getting-started/next`
+   * @default true
+   */
+  transformWin32RelativePath?: boolean;
+  /**
    * "" -> \"\"
    * @default true
    */
