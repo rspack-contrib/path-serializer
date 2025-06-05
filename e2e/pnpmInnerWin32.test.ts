@@ -39,6 +39,34 @@ test('should serialize <PNPM_INNER> with webpack path', () => {
   `);
 });
 
+test('should serialize Lynx JSX', () => {
+  const JSX = `
+function App() {
+    const value = "content 3";
+    return __RenderContent(/*#__PURE__*/ (0,_lynx_js_react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(__snapshot_4953c_00662_1, {
+        children: value
+    }, void 0, false, {
+        fileName: "D:\\\\user\\\\rspack\\\\app.jsx",
+        lineNumber: 3,
+        columnNumber: 26
+    }, this));
+}
+`;
+
+  expect(JSX).toMatchInlineSnapshot(`
+    function App() {
+        const value = "content 3";
+        return __RenderContent(/*#__PURE__*/ (0,_lynx_js_react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(__snapshot_4953c_00662_1, {
+            children: value
+        }, void 0, false, {
+            fileName: "<ROOT>/app.jsx",
+            lineNumber: 3,
+            columnNumber: 26
+        }, this));
+    }
+  `);
+});
+
 test('should serialize rspack diagnostic', () => {
   const posixDiagnostic = `
   File: /d/user/rspack/src/index.ts?__rslib_entry__:1:1
