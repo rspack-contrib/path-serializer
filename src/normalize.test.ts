@@ -80,6 +80,22 @@ function _class_private_method_get(receiver, privateSet, fn) {
   `);
   });
 
+  test('should serialize windows path in string', () => {
+    const code = normalizeCodeToPosix(`
+    {
+        loader: "C:\\\\user\\\\lynx-stack\\\\app.jsx",
+    }
+    `);
+
+    expect(code).toMatchInlineSnapshot(`
+      "
+          {
+              loader: "/c/user/lynx-stack/app.jsx",
+          }
+          "
+    `);
+  });
+
   test('should not transform http and https', () => {
     const code = normalizeCodeToPosix(`
     {
