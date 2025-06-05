@@ -1,6 +1,6 @@
 {
   "name": "path-serializer",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "path-serializer",
   "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
   "repository": {
