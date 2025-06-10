@@ -7,15 +7,30 @@ export interface PathMatcher {
 
 export interface Features {
   /**
-   * /foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts
+   * -> /d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts
    * @default true
    */
-  replaceRoot?: boolean;
+  transformWin32Path?: boolean;
+  /**
+   * file:///foo/rspack/packages/core/src -> <WORKSPACE>/src
+   */
+  replaceWorkspaceWithFileProtocol?: boolean;
   /**
    * /foo/rspack/packages/core/src -> <WORKSPACE>/src
    * @default true
    */
   replaceWorkspace?: boolean;
+  /**
+   * file:///foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * @default true
+   */
+  replaceRootWithFileProtocol?: boolean;
+  /**
+   * /foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * @default true
+   */
+  replaceRoot?: boolean;
   /**
    * /foo/node_modules/.pnpm/@swc+helpers@0.5.11/node_modules/@swc/helpers/esm/_class_private_method_get.js
    * -> /foo/node_modules/<PNPM_INNER>/@swc/helpers/esm/_class_private_method_get.js
@@ -23,26 +38,21 @@ export interface Features {
    */
   replacePnpmInner?: boolean;
   /**
-   * <TEMP>
+   * `${os.tmpdir()}/src/index.ts` -> "<TEMP>/src/index.ts"
    * @default true
    */
   replaceTmpDir?: boolean;
   /**
-   * <HOME>
+   * `${os.homedir()}/src/index.ts` -> "<HOME>/src/index.ts"
    * @default true
    */
   replaceHomeDir?: boolean;
   /**
-   * foo -> "foo"
+   * \u001b[1mBold Text\u001b[0m
+   * -> <CLR=BOLD>Bold Text<CLR=0>
    * @default true
    */
-  addDoubleQuotes?: boolean;
-  /**
-   * D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts
-   * -> /d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts
-   * @default true
-   */
-  transformWin32Path?: boolean;
+  transformCLR?: boolean;
   /**
    * "" -> \"\"
    * @default true
@@ -54,11 +64,10 @@ export interface Features {
    */
   escapeEOL?: boolean;
   /**
-   * \u001b[1mBold Text\u001b[0m
-   * -> <CLR=BOLD>Bold Text<CLR=0>
+   * foo -> "foo"
    * @default true
    */
-  transformCLR?: boolean;
+  addDoubleQuotes?: boolean;
 }
 
 export interface SnapshotSerializerOptions {
@@ -83,6 +92,10 @@ export interface SnapshotSerializerOptions {
    */
   replace?: PathMatcher[];
   /**
+   * @description all the features is executed in order
+   */
+  features?: Features;
+  /**
    * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
    */
   replacePost?: PathMatcher[];
@@ -90,7 +103,6 @@ export interface SnapshotSerializerOptions {
    * @description beforeSerialize -> replace -> workspace root pnpmInner temp home -> replacePost -> afterSerialize
    */
   afterSerialize?: (val: string) => string;
-  features?: Features;
 }
 
 export interface ApplyPathMatcherOptions {
