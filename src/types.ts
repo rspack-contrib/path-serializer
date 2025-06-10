@@ -7,25 +7,26 @@ export interface PathMatcher {
 
 export interface Features {
   /**
+   * file:///foo/rspack/packages/core/src -> <WORKSPACE>/src
+   * @default true
+   */
+  replaceWorkspaceWithFileProtocol?: boolean;
+  /**
+   * file:///foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * @default true
+   */
+  replaceRootWithFileProtocol?: boolean;
+  /**
    * D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts
    * -> /d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts
    * @default true
    */
   transformWin32Path?: boolean;
   /**
-   * file:///foo/rspack/packages/core/src -> <WORKSPACE>/src
-   */
-  replaceWorkspaceWithFileProtocol?: boolean;
-  /**
    * /foo/rspack/packages/core/src -> <WORKSPACE>/src
    * @default true
    */
   replaceWorkspace?: boolean;
-  /**
-   * file:///foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
-   * @default true
-   */
-  replaceRootWithFileProtocol?: boolean;
   /**
    * /foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
    * @default true
