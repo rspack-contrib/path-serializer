@@ -14,14 +14,14 @@ test('should work with __dirname', () => {
     }),
   );
 
+  const case0 = __dirname;
+  expect(case0).toMatchInlineSnapshot('<ROOT>');
+
   const case1 = join(__dirname, 'src', 'foo.ts');
   expect(case1).toMatchInlineSnapshot('<ROOT>/src/foo.ts');
 
-  const case2 = pathToFileURL(case1).toString();
-  expect(case2).toMatchInlineSnapshot('<ROOT>/src/foo.ts');
-
-  const case3 = __dirname;
-  expect(case3).toMatchInlineSnapshot('<ROOT>');
+  const case2 = pathToFileURL(case0).toString();
+  expect(case2).toMatchInlineSnapshot('<ROOT>');
 });
 
 test('real world case: nodejs win32 error stack', () => {
