@@ -7,64 +7,70 @@ export interface PathMatcher {
 
 export interface Features {
   /**
-   * D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts
-   * -> /d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts
+   * `file:///foo/rspack/packages/core/src` -> `<WORKSPACE>/src`
    * @default true
-   */
-  transformWin32Path?: boolean;
-  /**
-   * file:///foo/rspack/packages/core/src -> <WORKSPACE>/src
    */
   replaceWorkspaceWithFileProtocol?: boolean;
   /**
-   * /foo/rspack/packages/core/src -> <WORKSPACE>/src
-   * @default true
-   */
-  replaceWorkspace?: boolean;
-  /**
-   * file:///foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * `file:///foo/node_modules/.pnpm` -> `<ROOT>/node_modules/.pnpm`
    * @default true
    */
   replaceRootWithFileProtocol?: boolean;
   /**
-   * /foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * `D:\\foo\\node_modules\\<PNPM_INNER>\\css-loader\\utils.ts`
+   *
+   * ->
+   *
+   * `/d/foo/node_modules/<PNPM_INNER>/css-loader/utils.ts`
+   * @default true
+   */
+  transformWin32Path?: boolean;
+  /**
+   * `/foo/rspack/packages/core/src` -> `<WORKSPACE>/src`
+   * @default true
+   */
+  replaceWorkspace?: boolean;
+  /**
+   * `/foo/node_modules/.pnpm` -> `<ROOT>/node_modules/.pnpm`
    * @default true
    */
   replaceRoot?: boolean;
   /**
-   * /foo/node_modules/.pnpm/@swc+helpers@0.5.11/node_modules/@swc/helpers/esm/_class_private_method_get.js
-   * -> /foo/node_modules/<PNPM_INNER>/@swc/helpers/esm/_class_private_method_get.js
+   * `/foo/node_modules/.pnpm/@swc+helpers@0.5.11/node_modules/@swc/helpers/esm/_class_private_method_get.js`
+   *
+   * ->
+   *
+   * `/foo/node_modules/<PNPM_INNER>/@swc/helpers/esm/_class_private_method_get.js`
    * @default true
    */
   replacePnpmInner?: boolean;
   /**
-   * `${os.tmpdir()}/src/index.ts` -> "<TEMP>/src/index.ts"
+   * `${os.tmpdir()}/src/index.ts` -> `<TEMP>/src/index.ts`
    * @default true
    */
   replaceTmpDir?: boolean;
   /**
-   * `${os.homedir()}/src/index.ts` -> "<HOME>/src/index.ts"
+   * `${os.homedir()}/src/index.ts` -> `<HOME>/src/index.ts`
    * @default true
    */
   replaceHomeDir?: boolean;
   /**
-   * \u001b[1mBold Text\u001b[0m
-   * -> <CLR=BOLD>Bold Text<CLR=0>
+   * `\u001b[1mBold Text\u001b[0m` -> `<CLR=BOLD>Bold Text<CLR=0>`
    * @default true
    */
   transformCLR?: boolean;
   /**
-   * "" -> \"\"
+   * `""` -> `\"\"`
    * @default true
    */
   escapeDoubleQuotes?: boolean;
   /**
-   * \r\n -> \n
+   * `\r\n` -> `\n`
    * @default true
    */
   escapeEOL?: boolean;
   /**
-   * foo -> "foo"
+   * `foo` -> `"foo"`
    * @default true
    */
   addDoubleQuotes?: boolean;

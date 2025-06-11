@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url';
 import { applyMatcherReplacement } from './applyMatcherReplacement';
 import {
   createHomeDirMatchers,
@@ -30,8 +31,10 @@ export function createSnapshotSerializer(
   } = options || {};
 
   const {
-    replaceRoot = true,
+    replaceWorkspaceWithFileProtocol = true,
     replaceWorkspace = true,
+    replaceRootWithFileProtocol = true,
+    replaceRoot = true,
     replacePnpmInner = true,
     replaceTmpDir = true,
     replaceHomeDir = true,
@@ -81,6 +84,20 @@ export function createSnapshotSerializer(
 
       if (beforeSerialize) {
         replaced = beforeSerialize(replaced);
+      }
+
+      if (replaceWorkspaceWithFileProtocol && workspace) {
+        // this is a polyfill for .replaceAll(string, string)
+        replaced = replaced
+          .split(pathToFileURL(workspace).toString())
+          .join('<WORKSPACE>');
+      }
+
+      if (replaceRootWithFileProtocol && root) {
+        // this is a polyfill for .replaceAll(string, string)
+        replaced = replaced
+          .split(pathToFileURL(root).toString())
+          .join('<ROOT>');
       }
 
       if (transformWin32Path) {
