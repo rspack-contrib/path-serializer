@@ -87,14 +87,17 @@ export function createSnapshotSerializer(
       }
 
       if (replaceWorkspaceWithFileProtocol && workspace) {
-        replaced = replaced.replace(
-          pathToFileURL(workspace).toString(),
-          '<WORKSPACE>',
-        );
+        // this is a polyfill for .replaceAll(string, string)
+        replaced = replaced
+          .split(pathToFileURL(workspace).toString())
+          .join('<WORKSPACE>');
       }
 
       if (replaceRootWithFileProtocol && root) {
-        replaced = replaced.replace(pathToFileURL(root).toString(), '<ROOT>');
+        // this is a polyfill for .replaceAll(string, string)
+        replaced = replaced
+          .split(pathToFileURL(root).toString())
+          .join('<ROOT>');
       }
 
       if (transformWin32Path) {
