@@ -12,7 +12,7 @@ export interface Features {
    */
   replaceWorkspaceWithFileProtocol?: boolean;
   /**
-   * file:///foo/node_modules/.pnpm -> <ROOT>/node_modules/.pnpm
+   * `file:///foo/node_modules/.pnpm` -> `<ROOT>/node_modules/.pnpm`
    * @default true
    */
   replaceRootWithFileProtocol?: boolean;
