@@ -77,6 +77,6 @@ test('real world case: nodejs win32 error stack', () => {
         │     at require (node:internal/modules/helpers:179:18)
         │     at encode_napi (<ROOT>/node_modules/@lynx-js/tasm/index.js:48:17)
         │     at Object.fn (<ROOT>/node_modules/@lynx-js/template-webpack-plugin/lib/LynxEncodePlugin.js:145:71)
-        │     at Object.fn (file://<ROOT>/node_modules/@lynx-js/template-webpack-plugin/lib/LynxEncodePlugin.js:145:71)
+        │     at Object.fn (<ROOT>/node_modules/@lynx-js/template-webpack-plugin/lib/LynxEncodePlugin.js:145:71)
   `);
 });
