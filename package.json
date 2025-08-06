@@ -29,7 +29,7 @@
     "test:watch": "vitest",
     "test": "vitest run",
     "prepublish": "pnpm run build",
-    "release": "node ./scripts/release.mjs"
+    "bump": "npx bumpp"
   },
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged"
