@@ -2,7 +2,7 @@
   "name": "path-serializer",
   "version": "0.5.0",
   "description": "path-serializer",
-  "keywords": ["snapshot", "vitest", "jest", "ci", "test"],
+  "keywords": ["snapshot", "rstest", "vitest", "jest", "ci", "test"],
   "repository": {
     "type": "git",
     "url": "https://github.com/rspack-contrib/path-serializer.git"
@@ -29,7 +29,7 @@
     "test:watch": "vitest",
     "test": "vitest run",
     "prepublish": "pnpm run build",
-    "release": "node ./scripts/release.mjs"
+    "bump": "npx bumpp"
   },
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged"
