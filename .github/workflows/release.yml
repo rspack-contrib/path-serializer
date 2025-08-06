@@ -5,9 +5,9 @@ on:
     inputs:
       version:
         type: choice
-        description: "Release Version Type"
+        description: 'Release Version Type'
         required: true
-        default: "patch"
+        default: 'patch'
         options:
           - major
           - premajor
@@ -19,9 +19,9 @@ on:
 
       tag:
         type: choice
-        description: "Release Npm Tag"
+        description: 'Release Npm Tag'
         required: true
-        default: "latest"
+        default: 'latest'
         options:
           - canary
           - nightly
@@ -31,7 +31,7 @@ on:
 
       dry_run:
         type: boolean
-        description: "DryRun release"
+        description: 'DryRun release'
         required: true
         default: false
 
@@ -42,6 +42,7 @@ permissions:
 jobs:
   release:
     name: Release
+    environment: npm
     permissions:
       contents: write
       # To publish packages with provenance
@@ -52,14 +53,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Pnpm
-        run: corepack enable
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+
+      - name: Setup Package Managers
+        run: |
+          npm install -g npm@latest
+          npm --version
+          npm install -g corepack@latest --force
+          corepack enable
 
       - name: Install Dependencies
         run: pnpm install
@@ -73,4 +77,3 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           TAG: ${{ inputs.tag }}
           VERSION: ${{ inputs.version }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
